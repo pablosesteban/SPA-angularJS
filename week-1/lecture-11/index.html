@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Interpolation and Expressions</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="MyApp">
+    <h1>Interpolation and Expressions</h1>
+
+    <div ng-controller="expCtrl">
+       <!--
+       Expressions:
+           Something that turns into a value
+
+           Angula expressions are tied to the scope they are in
+
+           Does not display TypeError and ReferenceError to user
+
+        Interpolation:
+            Parsing a String and replacing placeholders with values
+
+            In Angular, these placeholders are usually expressions
+
+            The result is automatically updated when placeholder value changes (Two-Way Data Binding)
+       -->
+        {{name}}
+
+        <hr>
+
+        {{msg()}}
+
+        <hr>
+
+        {{osdjaisjsido}}
+
+        <!--
+        Expressions don't necessarily have to go only in the body of tag
+
+        They can also be part of tags themselves
+        -->
+        <button ng-click="feed()">Feed</button>
+        <br>
+        <!--
+        ng-src tag:
+             To tell the browser not only to try to fetch this URL but at the same time fetch it only when Angular is ready for interpretation of these placeholders
+
+             If using HTML src tag you'll see that there's an error trying to fetch the non-existent URL (with {{state}} literal)
+
+             You'll see that there's no errors anymore because the image only got fetched once Angular got a hold of this HTML and translated all the expressions into their values
+        -->
+        <img ng-src="img/yaakov_{{state}}.png">
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dependency Injection in Javascript (and AngularJS)</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="DIApp">
+    <h1>Dependency Injection (DI and IoC) in Javascript (and AngularJS)</h1>
+
+    <div ng-controller="DICtrl">
+       <!--
+       ng-blur tag
+           When the textbox will lose focus
+       -->
+        <input type="text" ng-model="name" ng-blur="upper();">
+    </div>
+</body>
+</html>
