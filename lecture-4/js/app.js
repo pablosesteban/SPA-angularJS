@@ -11,8 +11,19 @@ IIFE (Immediately-Invoked Function Expression)
      All the variables used inside the IIFE (like in any other normal function) are not visible outside its scope
 */
 (function() {
+    //We're enabling certain things to just protect us from making mistakes, i.e. creating global variables,...
     use 'strict';
     
+    /*
+    MVVM (Model-View-ViewModel)
+         Facilitates a separation of development of the graphical user interface (HTML) from development of the business logic or back-end logic (the data model)
+
+         The ViewModel of MVVM is a value converter, meaning the ViewModel is responsible for exposing (converting) the data objects from the model in such a way that objects are easily managed and presented. It is more Model than View, and handles most if not all of the view's display logic
+
+         View: HTML
+         ViewModel: angular controllers
+         Model:
+    */
     /*
     angular variable: is the only global variable exposed by AngularJS
     
@@ -22,7 +33,14 @@ IIFE (Immediately-Invoked Function Expression)
         return the module instance
     */
     angular.module("myFirstApp", [])
-    
+        /*
+        ViewModel (controller)
+            another construct of Angular that will be responsible for a smaller portion of our page (HTML)
+            is really the way we define the ViewModel of our View
+
+        controller method:
+            it takes the name of our ViewModel (the name of our controller) and a function that defines its functionality
+        */
         .controller("MyFirstController", function() {
             
         });

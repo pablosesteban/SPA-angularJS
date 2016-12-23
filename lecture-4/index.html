@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+ng-app tag
+    Stands for Angular application
+
+    You could place really anywhere we want, but usually you want to put it on the very outer tag that you want the Angular application to be responsible for
+
+    It means that anything in this DOM tree, from the beginning where we mentioned ng-app to the end of that tag, which in this case is beginning html and end html, our Angular application is responsible for. So this module has now been bound, this AngularJS app has been bound to our HTML
+
+    This index.html is really the View
+-->
+<html lang="en" ng-app="myFirstApp">
 <head>
     <meta charset="UTF-8">
     
@@ -8,7 +18,13 @@
     <script src="../js/angular-1.6.0.min.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="myFirstApp">
+<body>
+   <!--
+   ng-controller tag
+       Everything below this div and until this div is closed is being controlled by this controller
+
+       This div is really a piece of a View. And this piece of the view is being bound to app.js, and in particular, being bound to this function defined by the controller. This binding or this binder is happening automatically, and it's done by AngularJS for you
+   -->
     <div ng-controller="MyFirstController">
         
     </div>
