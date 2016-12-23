@@ -12,10 +12,10 @@ ng-app tag
 <html lang="en" ng-app="myFirstApp">
 <head>
     <meta charset="UTF-8">
-    
+
     <title>My First AngularJS App</title>
-    
-    <script src="../js/angular-1.6.0.min.js"></script>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body>
@@ -26,7 +26,18 @@ ng-app tag
        This div is really a piece of a View. And this piece of the view is being bound to app.js, and in particular, being bound to this function defined by the controller. This binding or this binder is happening automatically, and it's done by AngularJS for you
    -->
     <div ng-controller="MyFirstController">
-        <h1>Hello World</h1>
+        <h1>My First Angular App</h1>
+
+        <h3>{{ sayHello() }}</h3>
+        <!--
+        ng-model tag
+            Declaratively bind a piece of HTML to my scope
+
+            Means I want the value of this input attribute to always be equal to something on my scope (assume that there's something on my scope called name). So I can place an expression here (double curly braces) since name is sitting on the scope
+
+            Double data binding
+        -->
+        <input type="text" ng-model="name"><h3>My name is: {{ name }}</h3>
     </div>
 </body>
 </html>
