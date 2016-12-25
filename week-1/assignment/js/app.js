@@ -16,6 +16,8 @@
                     console.log(key + ": " + value);
                 });
 
+                $scope.color = "green";
+
                 if ($scope.items.split(",").length <= 3) {
                     $scope.msg = "Enjoy!";
                 }else {
@@ -23,6 +25,8 @@
                 }
             }else {
                 $scope.msg = "Please enter data first";
+
+                $scope.color = "red";
             }
         }
     }
