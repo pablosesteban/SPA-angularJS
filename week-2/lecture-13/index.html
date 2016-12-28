@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Custom Filters</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="MyApp">
+    <h1>Custom Filters</h1>
+
+    <div ng-controller="expCtrl">
+        <h5>{{sayMsgUppercase()}}</h5>
+
+        <p>{{cookieCost | currency : "€" : 4}}</p>
+
+        <p>{{likesMsg}}</p>
+        <p>{{sayLovesMsg()}}</p>
+
+        <!--
+        Using Custom Filter in HTML:
+            The name you registered the filter factory with the module is the name you use inside of your HTML template. You DO NOT append the word "FILTER" to it
+
+            And since we're inside HTML, there's NO NEED to INJECT a filter into the controller at all. Angular takes care of these references for you automatically
+
+            Only REGISTER the Filter Factory Function with the module
+
+            To use custom arguments as always
+        -->
+        <p>{{"Yaakov likes to eat healthy snacks at night!" | loves : " Hello World!"}}</p>
+
+        <!--
+        Chaining Filters in HTML:
+            Simply separating them with the pipe character which will make the result of one filter be with input to the next one in the chain until the very last filter which outputs a result displayed directly to the user
+        -->
+        <p>{{"Yaakov likes to eat healthy snacks at night!" | loves : " Hello World!" | uppercase}}</p>
+
+        <button ng-click="feed()">Feed</button>
+
+        <br>
+        <br>
+
+        <img ng-src="../../img/yaakov_{{state}}.png">
+    </div>
+</body>
+</html>
