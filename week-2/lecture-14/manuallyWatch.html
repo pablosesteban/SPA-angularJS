@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Digest Cycle (Watchers)</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/man.js"></script>
+</head>
+<body ng-app="MyApp">
+    <h1>Digest Cycle: Creating Manually Watchers</h1>
+
+    <div ng-controller="Ctrl">
+      <!--
+      When we use ng-keyup or ng-click, those keyup and click events will be handled by some handler that we bound to those events in the Angular Context
+
+      In other words, those handlers that are declared on the $scope or the scope service
+      -->
+       <button ng-click="showScopeService()">Log $scope Service</button>
+
+        <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+
+        <button ng-click="countOnce()">Make Once Counter One</button>
+
+        <button ng-click="incrementCounter()">Increment Counter</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Digest Cycle (Watchers)</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/auto.js"></script>
+</head>
+<body ng-app="MyApp">
+    <h1>Digest Cycle: Creating Automatically Watchers</h1>
+
+    <div ng-controller="Ctrl">
+     <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+
+     <button ng-click="incrCountOne()">Increment Count One</button>
+     <div>Count Once: {{countOne}}</div>
+
+      <button ng-click="incrCount()">Increment Count</button>
+
+      <div>Count: {{count}}</div>
+
+      <!-- TWO WAY DATA BINDING -->
+      <input type="text" ng-model="name">
+    </div>
+</body>
+</html>
