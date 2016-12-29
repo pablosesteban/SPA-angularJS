@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>AngularJS Data Binding</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="myApp">
+    <h1>AngularJS Data Binding</h1>
+
+    <div ng-controller="Ctrl">
+      <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+
+      <button ng-click="logFullName()">Log Full Name</button>
+
+      <hr>
+
+       <!--
+       TWO-WAY DATA BINDING:
+           Not only for this AngularJS set up a watcher for your name property that is sitting on the $scope, but it will also set up some sort of listener on the input element such that if the value of the input element changes, that change will be reflected in the name property on $scope
+
+           So in that case, you're really affecting the name property in both ways:
+               You can affect it by the user because they're typing things into the text box, and the $scope.name property gets updated
+
+               Likewise, if you update inside of your controller, the $scope.name property, that value will get updated and the browser, will get updated automatically which means that text box will display the new value that you updated inside of your controller
+       -->
+        Name: <input type="text" ng-model="name">
+
+        <hr>
+
+        <!--
+       ONE-WAY DATA BINDING:
+           The only way this value will change in the browser is if something inside the controller will update the lastName property on the $scope
+
+           There's no way for us to, at least directly through the double curly braces, affect the value of the lastName from the browser, from the user to the controller
+       -->
+        <div>
+            Last Name: {{ lastName }}
+        </div>
+
+        <hr>
+
+        <button ng-click="setFullName()">Set Full Name</button>
+
+        <!--
+        ONE-TIME DATA BINDING:
+            The digest cycle goes through the entire list of every watcher and if you have thousands of thousands of these watchers, obviously, that will take some time and therefore, the performance of your application will degrade (2000 per page max)
+
+            Double colons in front of the property that tells Angular JS it should set up a watcher for this property one it gets initialized and it will update that property in our UI, but at that point, AngularJS will automatically remove the watcher for that particular property, so you'll have one less
+
+            This only happens one time, so if that property were to get updated in the course of your app, that update will not be reflected in your UI
+        -->
+        <div>
+            Full Name: {{ ::fullName }}
+        </div>
+    </div>
+</body>
+</html>

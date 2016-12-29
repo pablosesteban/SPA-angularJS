@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>ng-repeat Directive</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="myApp">
+    <h1>ng-repeat Directive</h1>
+
+    <div ng-controller="Ctrl">
+      <h3>Shopping List</h3>
+
+      <!--
+      Watch the first item in it and we want to watch the quantity of that first item
+
+      Which means that the value inside the input element is going to directive reflect the quantitative value of the first item in the list
+      -->
+      <input type="text" ng-model="shoppingList[0].quantity">
+
+      <ul>
+         <!--
+         NG-REPEAT DIRECTIVE:
+             Similar to a foreach loop
+
+             We're going to be looping over shoppingList array or collection one array, and each time through duration the item of that collection that is being iterated over, is going to be equal to the item variable that we're setting up
+
+             Actually it repeates the LI tag over and over here interpolating the item in the array as the contents of that particular LI item
+
+             Allows us to access the looping index variable by exposing it to the body of the tag that ng-repeat is an attribute of by the $index
+         -->
+          <li ng-repeat="item in shoppingList">
+          <!--
+          We're setting up watchers for different items inside of our array that we'll looping over because double curly braces, sets up watchers, which means that if we change things inside of the array, the changes should appear on the screen automatically
+
+          This actually includes even if you're setting up a watch to yourself for a pretty deep value inside of the array
+          -->
+          {{$index}}. Buy {{item.quantity}} of {{item.name}}(s)
+          </li>
+      </ul>
+
+      <!--
+       NG-REPEAT also watches the entire collection as the whole, and will then re-render the view with the updated data
+      -->
+      <input type="text" ng-model="newItemName" placeholder="new item name">
+      <input type="number" ng-model="newItemQuantity" placeholder="new item quantity">
+      <button ng-click="addItemModel()">Add Item to Model</button>
+
+      <hr>
+
+      <input type="text" ng-model="newItemName" placeholder="new item name">
+      <input type="number" ng-model="newItemQuantity" placeholder="new item quantity">
+      <button ng-click="addItemScope()">Add Item to Scope</button>
+
+      <hr>
+
+      <button ng-click="logModelList()">Log Model shoppingList</button>
+      <button ng-click="logScopeList()">Log Scope shoppingList</button>
+    </div>
+</body>
+</html>

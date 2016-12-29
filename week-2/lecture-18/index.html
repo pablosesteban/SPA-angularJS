@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>AngularJS Filter: "filter"</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/filter.js"></script>
+</head>
+<body ng-app="myApp">
+    <h1>AngularJS Filter: "filter"</h1>
+
+    <div ng-controller="Ctrl">
+      <h3>Shopping List</h3>
+
+      <!--
+      Input element with ng-model being bound to a property that will create right now on the fly called search
+
+      The TWO-WAY DATA BINDING allow us to create this scope variable and watch it automatically to filter the list (as we type the search property array will get updated automatically)
+      -->
+      <input type="text" ng-model="search">
+      <ul>
+         <!--
+         JAVASCRIPT: $filter('filter')(array, expression, comparator, anyPropertyKey)
+
+         HTML: {{filter_expression | filter : expression : comparator : anyPropertyKey}}
+
+        Selects a subset of items from array and returns it as a new array
+
+        As I type in the input field the filter will kick in automatically since all these things are registered with watchers inside a digest loop, and our shoppingList will automatically be filtered based on whatever the search string that we're providing through the input element
+         -->
+          <li ng-repeat="item in shoppingList | filter : search">{{item}}</li>
+      </ul>
+
+      <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+    </div>
+</body>
+</html>
