@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <style> body { font-size: 1.2em; }</style>
+
+    <title>AngularJS Custom Services</title>
+  </head>
+
+  <body>
+    <h1>AngularJS Custom Services</h1>
+
+    <div ng-controller='AddToShoppingListCtrl as addToList'>
+        <input type="text" ng-model="addToList.itemName">
+        <input type="text" ng-model="addToList.itemQuantity">
+
+        <button ng-click="addToList.addItem()">Add Item</button>
+    </div>
+
+    <!--
+    CONTROLLER AS SYNTAXT also treat the controller function as a Contructor Function!!
+    -->
+    <div ng-controller='ShowShoppingListCtrl as showList'>
+        <ol>
+            <li ng-repeat="item in showList.items">
+                {{item.quantity}} of {{item.name}}
+
+                <button ng-click="showList.removeItem($index)">Remove Item</button>
+            </li>
+        </ol>
+    </div>
+  </body>
+</html>
