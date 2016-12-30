@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Angular Scope Inheritance</title>
+
+    <script src="../../js/angular-1.6.0.min.js"></script>
+    <script src="js/scopeInheritance.js"></script>
+</head>
+<body ng-app="myApp">
+   <h1>Angular Scope Inheritance</h1>
+
+   <!--
+   When you declare that a controller is responsible for part of your page, some natural nesting of controllers will occur
+
+   The scope of the inner controller PROTOTYPICALLY INHERITS from the scope of the outer controller
+
+   The properties declared in the outer controller scope, Ctrl-1, in this case, are accessible to the inner controller scope, Ctrl-2, without any extra effort if the inner controller doesn't mask those outer parent controller scope properties by declaring those same properties on its own scope
+   -->
+    <div ng-controller="Ctrl1">
+       <h3>Controller Normal Syntaxt</h3>
+        <div ng-controller="Ctrl2">
+            Outer Scope Property: {{lastName}}
+
+            <br>
+
+            Inner Scope Property: {{name}}
+
+            <br>
+
+            <!--
+            The only way to go to parent scope is using the prototype inheritance chain
+
+            __proto__ is an internal Javascript object so we should avoid to use it, but AngularJS exposed at least, if not all of it but certainly part of it, of that object to us as a $parent to use it instead
+            -->
+            Outer Scope Property: {{__proto__.name}}
+            <br>
+            Outer Scope Property: {{$parent.name}}
+        </div>
+    </div>
+
+    <!--
+    CONTROLLER AS SYNTAXT:
+        Provides us with a very convenient object we can use to attach all of our properties to, so property masking does not get in the way
+
+        So in this case for the first controller, it's $scope.ctrl3 and for the second $scope.ctrl4
+
+        Those properties, in this case, ctrl3 and ctrl4, point to objects that are instances of the controllers themselves, i.e. the controller instance gets attached as a property on the $scope
+
+        A rough idea of what happens behind the scenes:
+            After AngularJS creates the scope for our Ctrl-3, which we'll call $scope3 for now, AngularJS attaches a property called ctrl3, the same as our label, and then instatiates it using our controller function, as a function constructor, i.e. ctrl3 is now equivalent to the this keyword inside of our function constructor represented by a function that we specified as our controller function: $scope3.ctrl3 = new Ctrl-3();
+
+            Since we're on prototypical inheritance, $scope4 which is the inner scope is going to get created based on $scope3, which is the outer scope: $scope4 = Object.create($scope3);
+
+            Then we're going to go through a similar process where we're going to create a property for scope4 with the name of the label that we assigned our Ctrl-4 as, which is ctrl4 and we'll initialize it with the instance of the Ctrl-4 function that is created using the new keyword, therefore, using Ctrl-4 function as a function constructor: $scope4.ctrl4 = new Ctrl-4();
+
+            So, yet again, the ctrl4 is going to be pointing to the same thing, that the this keyword will point to inside of the Ctrl-4 function constructor
+
+            Makes the HTML templates simpler as well, i.e. not only does it allow me to access properties that are named the same from the parent scope without masking any properties, it also makes for a much more readable code
+    -->
+    <div ng-controller="Ctrl3 as ctrl3">
+       <h3>Controller As Syntaxt</h3>
+
+        <div ng-controller="Ctrl4 as ctrl4">
+           <!--
+           Properties are not going to be added directly to the $scope but going too be added to the $scope.ctrl3 property or $scope.ctrl3 object and since we know that we don't need to actually mention $scope, that property that is sitting on the $scope which is the ctrl3 property could now be be referenced directly in our HTML template
+           -->
+            Outer Scope Property: {{ctrl3.name}}
+
+            <br>
+
+            Inner Scope Property: {{ctrl4.name}}
+        </div>
+    </div>
+</body>
+</html>
