@@ -13,7 +13,11 @@
         factory() method:
             Sometimes called a service factory
 
-            Is not just another way of creating the same service you create with the service() method, but it can be (it cab be a singleton)
+            Is not just another way of creating the same service you create with the service() method, but it can be
+
+            First argument: the name that we use to inject the factory into other services, controllers, etc
+
+            Second argument: the factory function that's expected to produce a service when you execute it
 
         service() method:
             Also called a factory, but a much more limited one compared to the factory() method
@@ -46,12 +50,33 @@
         }
     }
 
+    /*
+    2 ways of implementing the factory:
+        1) Returning a function as a result of the execution of our factory function which instantiates the service and returns it
+
+        2) Returning an object literal with some methods which instantiates the service and returns it
+
+    No matter what way used, we are the ones responsible for instantiating the service, i.e. we're in control of how it gets created
+    */
     function ShoppingListServiceFactory() {
         return function(maxItems) {
             return new ShoppingListService(maxItems);
         };
+
+        /*
+        return {
+            getShoppingListService: function(maxItems) {
+                return new ShoppingListService(maxItems);
+            },
+
+            getSomeOtherService: function(){}
+        };
+        */
     }
 
+    /*
+    Each controller use a different instance of the ShoppingListService service!!
+    */
     ShoppingListCtrl1.$inject = ["ShoppingListServiceFactory"];
     function ShoppingListCtrl1(ShoppingListServiceFactory) {
         /*
