@@ -30,19 +30,24 @@ function ShoppingList() {
 
         In our HTML template, we use the same normalization rules we use for the element name
 
-        Bidirectional Binding "=attributeName":
+        Bidirectional Binding "=attributeName" or "=?":
             Is probably the most communicative way, means that if you change the parent value the value in the directive will change automatically and vice versa
 
             If you leave the value as simply an equal sign (=), AngularJS compiler will assume that the name of the attribute in the HTML template is the same as your directives property name
 
             If you follow the equals sign with a question mark (=?), that will signify to the Angular compiler that the name of the attribute in the HTML template is the same as your directives property name and it is optional
 
-        One Way Binding "@":
+        One Way Binding "@attributeName" or "<":
             Tells the Angular compiler that we want to bind the property to the DOM's attribute "value" that's located in the same element as our directive
 
             The result value that's assigned the property in our directive scope in this setup is always a STRING
 
             The outer value (DOM's value attribute) change affects the inner value but if we explicitly change the property that's bound to the attribute in side of the directive the value of the attribute DOM node will be unaffected
+
+        Bidirectional VS One Way Binding:
+            It is a best practice to try to avoid changing the values inside the directive: DO NOT use this approach if we have no plans of changing the bound value inside of the directive, we are wasting resources because angular is setting up extra watches inside of our directive that will be always checked but never used
+
+            Obviously, one-way binding does not change how JavaScript fundamentally works. So, if you pass on the primitive like a number using one-way binding, one-way binding can guarantee that the value outside the directive will not be affected by anything you do in the directive with a pass in value. However if you pass in an object and your directive changes the value of a property of that object, while no watches will be set up or triggered as a result, the context outside your directive will definitely be affected since the change will be visible outside of the directive
         */
       list: '=myList',
       title: '@title'
