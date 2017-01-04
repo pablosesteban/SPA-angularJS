@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <script src="../../js/angular-1.6.1.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <title>Custom Directives</title>
+  </head>
+
+    <!--
+    ANGULAR COMPILATION:
+        Once Angular was able to find "ngApp" directive on an element it got access to the entire document object model that was attached to that element. The Angular functions are then free to manipulate that tree of HTML nodes however it pleases. It can then replace the variables surrounded by double curly braces with values it looks up in the dollar sign scope. It can also examine any node, be it content, tag or attribute, and decide if it should replace it with something else attach some functional behavior to it etc
+
+        Usually happens at the beginning when you'll load your page or particular HTML template but sometimes even later
+
+    ANGULAR DIRECTIVES:
+        HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web applications
+
+        Angular allows you to extend the standard HTML into whatever suits your particular application using directives
+
+        A Directive is really just a Marker on a DOM element that tells Angular's HTML compiler to attach a specified behavior to that DOM element
+
+        The compiler can also transform/change the DOM elements and its children
+
+        A directive can be and ATTRIBUTE, and ELEMENT NAME, a comment, and even a CSS class, however it's not a best practice to use comments, or CSS classes in order to use directives
+
+        Using them to:
+            reusing in multiple places in our application (code reuse right inside of our HTML templates)
+            crete HTML code itself became very schematic (HTML5)
+    -->
+  <body ng-app='MyApp'>
+    <h1>Custom Directives</h1>
+
+    <div ng-controller="MyCtrl as ctrl">
+      Name: <input type="text" ng-model="name">
+       <!--
+       STEP 3: use the tag in our HTML
+           In order for angular to match your element or attribute to the name of the directive it first needs to NORMALIZED the name it finds in HMTL
+
+           The way it normalizes the name is by removing the dash and then capitalizing the next letter, it replaces the dash delimited notation with camel case notation
+
+           When AngularJS sees my-tag in our HTML it will look for a directive that was registered with the name myTag with the T capitalized and obviously it will find our declaration of a directive called myTag with the T capitalized thus connecting the two pieces together and providing the functionality that is defined In the myTag factory function
+       -->
+        <my-tag></my-tag>
+
+        <my-tag-div></my-tag-div>
+        <my-tag-div></my-tag-div>
+    </div>
+  </body>
+</html>
