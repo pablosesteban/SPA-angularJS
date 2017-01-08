@@ -1,0 +1,12 @@
+<h3>{{ list.title }}</h3>
+
+<ol>
+  <li ng-repeat="item in list.items">
+    {{ item.quantity }} of {{ item.name }}
+  </li>
+</ol>
+
+<!--
+STEP 4: Use the controller in HTML template
+-->
+<div class="error" ng-if="list.cookiesInList()">WARNING! WARNING! COOKIES DETECTED!</div>
