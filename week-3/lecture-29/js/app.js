@@ -6,7 +6,7 @@ angular.module('ShoppingListDirectiveApp', [])
 .factory('ShoppingListFactory', ShoppingListFactory)
 /*
 ADD CONTROLLER TO A DIRECTIVE:
-    To add functionality to the directive
+    When we want to bundle behavior (add functionality) with the directive, we can declare a controller directly on the directive
 
     We could declare the controller used by the directive on the module itself
 
@@ -33,24 +33,26 @@ function ShoppingListDirective() {
     STEP 2: Attach the controller to a directive
 
     The value of that property should be:
-        a function that will implement that controller
+        1) a function that will implement that controller
 
-        a string using controller as syntax if the controller has been registered into the module
+        2) a string using controller as syntax IF, AND ONLY IF, the controller has been registered into the module
 
     The properties that are declared in our isolate scope, would now be available on the $scope inside of our controller
     */
+    //2)
     controller: 'ShoppingListDirectiveController as list',
-    /*
-    Tells angular to place our isolate scope properties after the controller instance instead of directly on the scope
+    //1)
+    //controller: "ShoppingListDirectiveController,
 
-    controller: "ShoppingListDirectiveController,
-    */
     /*
-    Specifies the label in our controllerAs syntax so we can use that label to refer to scope properties and methods in the html template
-
-    controllerAs: 'list',
+    Tells angular to place our isolate scope properties after the controller instance instead of directly on the $scope instance
     */
     bindToController: true
+
+    /*
+    Specifies the label in our Controller As Syntax so we can use that label to refer to scope properties and methods in the html template
+    */
+    //controllerAs: 'list',
   };
 
   return ddo;
@@ -63,9 +65,11 @@ function ShoppingListDirectiveController() {
   var list = this;
 
     /*
-    Note one obvious point, since we declared our directive scope to be isolate scope, anything we attach to that scope is still inside the isolate scope
+    Note one obvious point, since we declared our directive scope to be isolate scope, anything we attach to that scope is still inside the isolate scope and not just what was mapped through the scope declaration in the DDO
 
-    And not just what was mapped through the scope declaration in the DDO
+    We can use this method inside the HTML template used by the directive
+
+    Really the error message should be part of the shopping list directive. After all, the shopping list knows about the items in the list and it can decide whether or not an error message should be displayed
     */
   list.cookiesInList = function () {
     for (var i = 0; i < list.items.length; i++) {

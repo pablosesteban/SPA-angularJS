@@ -30,7 +30,7 @@ Creating CUSTOM DIRECTIVES
         /*
         The DDO consists of multiple properties that are defined in the AngularJS documentation
 
-        The scope of your directive will be the same scope of the containing controller unless you specify otherwise, i.e. the $scope inside of our directive was the exact same object as the $scope of our directive's parent controller
+        The SCOPE of your DIRECTIVE will be the SAME scope of the CONTAINING CONTROLLER unless you specify otherwise, i.e. the $scope inside of our directive was the exact same object as the $scope of our directive's parent controller
 
         That type of setup makes a directive dependent on our particular controller, i.e. there's TOO MUCH COUPLING going on between the controller and the directive
         */

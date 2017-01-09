@@ -6,10 +6,10 @@
     <script src="../../js/angular-1.6.1.min.js"></script>
     <script src="js/app.js"></script>
 
-    <title>Directives with Isolate Scope</title>
+    <title>Directives with Isolate Scope (breaking directives $scope inheritance)</title>
   </head>
   <body>
-    <h1>Directives with Isolate Scope</h1>
+    <h1>Directives with Isolate Scope (breaking directives $scope inheritance)</h1>
 
     <!-- LIST #1 - unlimited items -->
     <div id="list1" ng-controller='ShoppingListController1 as list1'>
@@ -18,7 +18,10 @@
       <button ng-click="list1.addItem();">Add Item</button>
 
         <!--
-        We were now able to create a reusable directive, our usable component so to speak, that we're able to use in two separate controllers without the controller's properties affecting how we implement our directive
+        Using "my-list" attribute we were now able to create a reusable directive, our usable COMPONENT so to speak, that we're able to use in two separate controllers without the controller's properties affecting how we implement our directive
+
+        "title" is given the value of $scope title interpolated string:
+            The parent controller's $scope title property is being updated when remove and add an element and therefore, our attributes value that is holding this actual string gets interpolated again and gets passed in into our directive over and over again
         -->
       <shopping-list my-list="list1" title="{{list1.title}}"></shopping-list>
 

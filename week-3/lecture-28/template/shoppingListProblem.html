@@ -1,0 +1,11 @@
+<ol>
+ <!--
+ This html template using in directive declaration is attached to some kind of containing controller which declares a "list1" attribute on the $scope which will be inherited by the directive!
+
+ If containing controlloer does not declare it, this won't work at all and NO ERROR will be thrown!
+ -->
+  <li ng-repeat="item in list1.items">
+    {{ item.quantity }} of {{ item.name }}
+    <button ng-click="list1.removeItem($index);">Remove Item</button>
+  </li>
+</ol>

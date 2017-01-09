@@ -1,23 +1,17 @@
+/*
+Providing Data from Directive to Parent Controller:
+    There are times when it makes sense that the directive should invoke a method on its parent passing it some data only our directive would know about
+
+    Say you have a directive like the one we've been working with that's responsible for displaying the shopping list. It may also be responsible for providing a button to remove an item from the list. However, it's the parent that's in charge of that data. The shopping list directive only displays the list. It has no idea, and shouldn't have any idea what should happen if someone wants to remove something from the list. Maybe some side effect needs to occur that has nothing to do with the responsibilities of our directive. The actual data manipulation like removal of an item needs to happen in the parent controller
+
+    In other words we need to set up a link from the directive to some method on the parent and then provide some data from the directive to that parents method for execution. However, we must be careful the parent has to execute that method in the parents context not in a directives context
+*/
 (function () {
 'use strict';
 
 angular.module('ShoppingListDirectiveApp', [])
 .controller('ShoppingListController', ShoppingListController)
 .factory('ShoppingListFactory', ShoppingListFactory)
-/*
-ADD CONTROLLER TO A DIRECTIVE:
-    To add functionality to the directive
-
-    We could declare the controller used by the directive on the module itself
-
-    Then we have a controller that we can now reference through the name as a String anywhere inside of this angular module, as angular will look up the string to see if there is any such component exists in this module
-
-    So we can actually use this controller in more than one place
-
-    We have a reusable controller and not that just in this file because here obviously, in this file we could reuse this function without any problems, but if it was in a different file and we're still working of the same module, if we left this just as a regular local function, inside of this if function it won't be visible. However once we stack it is a declared controller on the angular module, any where this module is being referenced, we're going to actually retrieve this controller and reuse it
-
-    STEP 1: register the controller into the module (optional)
-*/
 .controller('ShoppingListDirectiveController', ShoppingListDirectiveController)
 .directive('shoppingList', ShoppingListDirective);
 
@@ -27,46 +21,29 @@ function ShoppingListDirective() {
     templateUrl: 'template/shoppingList.html',
     scope: {
       items: '<',
-      title: '@'
+      myTitle: '@title',
+
+        /*
+        STEP 2: Declare method reference in directive
+             The property name will serve as the reference to pass in the method that exist on a parent controller scope, used in the HTML template used by this directive
+
+             The property value, the ampersand sign will be followed by the name method, is what we'll need to use in the parents HTML template, to pass in the reference to the parent method
+
+             "&" binding allows us to execute an expression (such a function value) in the context of the parent scope
+        */
+        removeItem: "&onRemove",
+        badRemove: "="
     },
-    /*
-    STEP 2: Attach the controller to a directive
-
-    The value of that property should be:
-        a function that will implement that controller
-
-        a string using controller as syntax if the controller has been registered into the module
-
-    The properties that are declared in our isolate scope, would now be available on the $scope inside of our controller
-    */
     controller: 'ShoppingListDirectiveController as list',
-    /*
-    Tells angular to place our isolate scope properties after the controller instance instead of directly on the scope
-
-    controller: "ShoppingListDirectiveController,
-    */
-    /*
-    Specifies the label in our controllerAs syntax so we can use that label to refer to scope properties and methods in the html template
-
-    controllerAs: 'list',
-    */
     bindToController: true
   };
 
   return ddo;
 }
 
-/*
-STEP 3: Implement the controller function
-*/
 function ShoppingListDirectiveController() {
   var list = this;
 
-    /*
-    Note one obvious point, since we declared our directive scope to be isolate scope, anything we attach to that scope is still inside the isolate scope
-
-    And not just what was mapped through the scope declaration in the DDO
-    */
   list.cookiesInList = function () {
     for (var i = 0; i < list.items.length; i++) {
       var name = list.items[i].name;
@@ -99,9 +76,21 @@ function ShoppingListController(ShoppingListFactory) {
     list.title = origTitle + " (" + list.items.length + " items )";
   };
 
+    /*
+    STEP 1: Define the  method in the controller
+        Parent controller's method to be called with the itemIndex provided by the directive
+    */
   list.removeItem = function (itemIndex) {
+      //In order to know to which object the "this" keyword is pointing to when the method gets executed
+      console.log("this keyword: ", this);
+
+      //Assigned to "this", to whatever it points to
+      this.lastRemoveItem = "Last item removed was " + this.items[itemIndex].name;
+
     shoppingList.removeItem(itemIndex);
-    list.title = origTitle + " (" + list.items.length + " items )";
+
+    //Assigned to "this", to whatever it points to
+    this.title = origTitle + " (" + list.items.length + " items )";
   };
 }
 

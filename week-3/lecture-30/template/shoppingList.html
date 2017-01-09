@@ -1,12 +1,30 @@
-<h3>{{ list.title }}</h3>
+<h3>{{ list.myTitle }}</h3>
 
 <ol>
   <li ng-repeat="item in list.items">
     {{ item.quantity }} of {{ item.name }}
+
+    <!--
+    STEP 4: Mapping method and arguments in directive template
+        Using our directive's controller as a label (list) and invoking the method (removeItem) as declared on the isolate scope binding
+
+        What we're passing into the method is not your regular argument, instead we're using the name of the argument that parent made the call with and mapping some value to it from our directive
+
+        So what we're passing into the method is an object, not a single argument. The keys in that map object have to correspond to the argument name or names the parent controller declared the call with and values, something that lives inside the directive
+
+    We need to do that as the $index variable is only available inside the body of the tag that contains the ng-repeat directive, so it needs to be passed to the parent controller in order to know what element needs to be removed
+    -->
+    <button ng-click="list.removeItem({index: $index})">Remove Item</button>
+
+    <!--
+    As badRemove is a function value, surrounded with parenths will execute it passing it the index of the element in the array
+
+    But here, "this" keyword is pointing to ShoppingListDirectiveController which is not what we want because because is the controller for our isolate scope and we wanted this to execute in the parent controller's scope (ShoppingListController)
+
+    So all things assigned using "this" keyword are actually being assigned directly to our directives isolate scope
+    -->
+    <button ng-click="list.badRemove($index)">Bad Remove Item</button>
   </li>
 </ol>
 
-<!--
-STEP 4: Use the controller in HTML template
--->
 <div class="error" ng-if="list.cookiesInList()">WARNING! WARNING! COOKIES DETECTED!</div>
