@@ -70,10 +70,13 @@ Principles of component based architecture:
     });
 
     //Controller Functions
-    ShoppingListComponentController.$inject = ["$scope", "$element"];
-    function ShoppingListComponentController($scope, $element) {
+    ShoppingListComponentController.$inject = ["$element"];
+    function ShoppingListComponentController($element) {
         //local variable, can be any allowed name but naming the same as in the component template
         var $ctrl = this;
+
+        //Total items in our shopping list, in order to use the $doCheck() method for comparison
+        var totalItems;
 
         $ctrl.cookiesInList = function () {
             for (var i = 0; i < $ctrl.items.length; i++) {
@@ -96,6 +99,9 @@ Principles of component based architecture:
         */
         //This is only going to get executed once when the controller gets instantiated
         $ctrl.$onInit = function() {
+            //Initialized once
+            totalItems = 0;
+
             console.log("$onInit() executed!");
         }
 
@@ -115,32 +121,37 @@ Principles of component based architecture:
             console.log("$onChanges() changeObject: ", changeObject);
         }
 
-        //Basically the same thing as the "link" property that we used before in custom directives, so let's use it in the same way as we used it before
-        $ctrl.$postLink = function() {
-            //To setup a watch on the cookiesInList function we need to scope variable because we need the $scope.$watch function so we have to inject it in the controller
-            $scope.$watch("$ctrl.cookiesInList()", function(newVal, oldVal) {
-                /*
-                The problem is that this function doesn't actually have the scope, element... objects injected by angular like in custom directives
+        /*
+        Since version 1.5.8
 
-                In order to get at the actual element that is our component (the parent item or the top item of our component) there is another service called $element that we have to inject
-                */
-                console.log("$element service object: ", $element);
+        Called on each turn of the digest cycle
 
-                if (newVal === true) {
-                    //If jQuery is available for us the $element actually represents an element as a jQuery object
-                    var elementDiv = $element.find("div.error");
+        Instead of setting up a watch (which might actually slow things down a little bit more, in terms of performance) in the $link() method, this hook could be useful if you wish to check changes to which would not be detected by Angular's change detector and thus not trigger $onChanges (like items, in this case, as our bindings watch only is looking at the items referenced itself)
 
-                    console.log(elementDiv)
+        We can remove $scope injection as it is no used now, and it isn't something we want to depend on, as someone can start attaching properties to it which is a bad practice
 
-                    elementDiv.fadeIn("slow");
+        It is invoked with no arguments, so if detecting changes, you must store the previous value(s) for comparison to the current values
+        */
+        $ctrl.$doCheck = function() {
+            if (totalItems !== $ctrl.items.length) {
+                console.log("# of items changed. Checking for Cookies!");
+
+                totalItems = $ctrl.items.length;
+
+                if ($ctrl.cookiesInList()) {
+                    console.log("Oh, NO! COOKIES!!!!!");
+
+                    var warningElem = $element.find('div.error');
+
+                    warningElem.slideDown(900);
                 }else {
-                    var elementDiv = $element.find("div.error");
+                    console.log("No cookies here. Move right along!");
 
-                    console.log(elementDiv)
+                    var warningElem = $element.find('div.error');
 
-                    elementDiv.find("div").fadeOut("slow");
+                    warningElem.slideUp(900);
                 }
-            });
+            }
         }
     }
 

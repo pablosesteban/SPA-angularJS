@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='ShoppingListEventApp'>
+    <head>
+        <meta charset="utf-8">
+
+        <!--
+        BEFORE Angular!
+        -->
+        <script src="../../js/jquery-3.1.1.js"></script>
+        <script src="../../js/angular-1.6.1.min.js"></script>
+        <script src="js/app.js"></script>
+
+        <link rel="stylesheet" href="/css/styles.css">
+
+        <title>AngularJS Event System</title>
+    </head>
+    <body>
+        <h1>AngularJS Event System</h1>
+
+        <div ng-controller='ShoppingListController as list'>
+            <input type="text" ng-model="list.itemName" placeholder="item name">
+            <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
+
+            <button ng-click="list.addItem();">Add Item</button>
+
+            {{list.lastRemoveItem}}
+
+            <!--
+            Used as exactly as you would use the custom directives
+
+            Note the normalized property names
+            -->
+            <shopping-list
+                items="list.items"
+                title="{{list.title}}"
+                on-remove="list.removeItem(index)"></shopping-list>
+        </div>
+
+        <!--
+        Component out of ShoppingListController scope
+
+        It is necessary to use $rootScope to emit or broadcast the events!
+        -->
+        <loading-spinner></loading-spinner>
+    </body>
+</html>
