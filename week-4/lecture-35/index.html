@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+STEP 3: Wire in the name of the main module into our HTML using the "ng-app" directive
+-->
 <html ng-app='ShoppingList'>
     <head>
         <meta charset="utf-8">
@@ -36,6 +39,15 @@
         -->
         <loading-spinner></loading-spinner>
 
+        <!--
+        The browser processes HTML sequentially, that means that conceptually, the browser will combine all of your JavaScript files into one JavaScript file
+
+        It does not matter in which order you declare modules in your HTML or in your JavaScript file if you think of the whole setup as one gigantic JavaScript file
+
+        Once Angular reads in all the module declarations, it will figure out which module depends on which other module, and will instantiate them in the proper order
+
+        However, what you absolutely CANNOT do is declare an artifact for a module before you create that module
+        -->
         <!-- Libraries -->
         <script src="lib/jquery-3.1.1.js"></script>
         <script src="lib/angular-1.6.1.min.js"></script>
@@ -47,6 +59,7 @@
         <script src="src/shopping_list/shopping_list.module.js"></script>
         <script src="src/spinner/spinner.module.js"></script>
 
+        <!-- It's actually a best practice to call them by the name of the service then followed by period, followed by the name of the artifact -->
         <!-- 'ShoppingList' Module Artifacts -->
         <script src="src/shopping_list/shopping_list.component.js"></script>
         <script src="src/shopping_list/shopping_list.controller.js"></script>

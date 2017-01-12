@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='RoutingApp'>
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="../../css/styles.css">
+
+        <script src="../../js/angular-1.6.1.min.js"></script>
+        <!--
+        STEP 1: Reference the package in HTML
+            This MUST be AFTER angular core package as it depends on it
+        -->
+        <script src="../../js/angular-ui-router-0.3.2.min.js"></script>
+        <script src="src/app.js"></script>
+
+        <title>Introduction to UI-ROUTER Module</title>
+    </head>
+    <body>
+        <h1>Introduction to UI-ROUTER Module</h1>
+
+        <div>
+            <!--
+            ui-sref directive:
+                Stands for "UI router state reference"
+
+                Creating the "href" attribute for our anchor tag such as it's pointing to the right URL (using # sign)
+
+            ui-sref-active:
+                Add a "class" attribute activeTab to the tag when it will be active
+            -->
+            <a ui-sref="tab1" ui-sref-active="activeTab">Tab 1</a>
+
+            <button ui-sref="tab2" ui-sref-active="activeTab" >Tab 2</button>
+
+            <a ui-sref="tab3" ui-sref-active="activeTab">Tab 3</a>
+        </div>
+
+        <!--
+        STEP 2: Place ui-view directive in HTML
+            This is where our interchangeable view can be dynamically placed
+
+            When the view of our particular state is loaded it will be inserted into body of it
+        -->
+        <ui-view></ui-view>
+    </body>
+</html>

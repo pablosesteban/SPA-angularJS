@@ -1,6 +1,14 @@
 (function () {
     'use strict';
 
+    /*
+    STEP 2: Declare Module Artifacts
+        The second argument to the module method is omitted
+
+        This assumes that we have previously created this module
+
+        If we haven't, the code to retrieve the module will cause an error
+    */
     angular.module('ShoppingList')
 
     .controller("ShoppingListController", ShoppingListController);
