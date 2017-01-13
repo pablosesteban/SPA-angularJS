@@ -1,0 +1,11 @@
+<ul>
+   <!--
+    NOTE THAT:
+       The name of our state is no longer itemDetail, instead the name of our state is "mainList.itemDetail"
+
+       The syntax to pass the index is the same!
+    -->
+    <li ng-repeat="item in $ctrl.items" ui-sref="mainList.itemDetail({itemId: $index})">
+        {{item.quantity}} of {{item.name}}
+    </li>
+</ul>

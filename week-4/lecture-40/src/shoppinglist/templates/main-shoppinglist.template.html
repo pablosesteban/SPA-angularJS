@@ -1,0 +1,13 @@
+<!-- Breadcrumbs -->
+<a ui-sref="home">Home</a> &lt; <a ui-sref="mainList" ui-sref-active="activeTab">List</a>
+
+<h3>List</h3>
+
+<!-- bindings property in component -->
+<shopping-list items="mainList.items"></shopping-list>
+
+<!--
+STEP 2: Declaring the ui-view directive into parent html template
+    Having a child state also means that somewhere in the parent's template there's a declaration of the ui-view, into which the child template can insert its own template
+-->
+<ui-view></ui-view>
