@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app='ShoppingList'>
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="/css/styles.css">
+
+        <title>UI-ROUTER Module State Transition Events</title>
+    </head>
+
+    <body>
+        <h1>UI-ROUTER Module State Transition Events</h1>
+
+        <ui-view></ui-view>
+
+        <!-- Use the spinner component from the module Spinner -->
+        <loading-spinner></loading-spinner>
+
+        <!-- Libraries -->
+        <script src="/js/angular-1.6.1.min.js"></script>
+        <script src="/js/angular-ui-router-0.3.2.min.js"></script>
+
+        <!-- Modules -->
+        <!-- Add the Spinner module! Does not matter the order! -->
+        <script src="src/spinner/spinner.module.js"></script>
+        <!-- this module uses the above but angular figures it out and does work! -->
+        <script src="src/shoppinglist/shoppinglist.module.js"></script>
+
+        <!-- Routes -->
+        <script src="src/routes.js"></script>
+
+        <!-- 'ShoppingList' module artifacts -->
+        <script src="src/shoppinglist/shoppinglist.component.js"></script>
+        <script src="src/shoppinglist/main-shoppinglist.controller.js"></script>
+        <script src="src/shoppinglist/shoppinglist.service.js"></script>
+        <!-- Add the new controller -->
+        <script src="src/shoppinglist/item-detail.controller.js"></script>
+        <!-- Add the spinner component -->
+        <script src="src/spinner/spinner.component.js"></script>
+    </body>
+</html>

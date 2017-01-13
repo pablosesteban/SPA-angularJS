@@ -38,6 +38,9 @@
                   //The UI router will then wait for the items property to get resolved before it takes us to this mainList UI state
                   return ShoppingListService.getItems();
               }]
+          },
+          params: {
+              itemId: null
           }
       })
 

@@ -1,5 +1,5 @@
 <!-- Breadcrumbs -->
-<a ui-sref="home">Home</a> &lt; <span ui-sref-active="activeTab"><a ui-sref="mainList">List</a></span> <span ng-if="mainList.itemId !== null"> &lt; <a ui-sref="mainList.itemDetail({itemId: mainList.itemId})">{{mainList.items[mainList.itemId].name}}</a></span>
+<a ui-sref="home">Home</a> &lt; <a ui-sref="mainList" ui-sref-active="activeTab">List</a>
 
 <h3>List</h3>
 
