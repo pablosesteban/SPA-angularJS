@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+</head>
+<body ng-app="RestaurantMenuApp">
+
+    <ui-view></ui-view>
+
+    <script src="/js/angular-1.6.1.min.js"></script>
+    <script src="/js/angular-ui-router-0.3.2.min.js"></script>
+
+    <!-- Module -->
+    <script src="src/restaurant_menu.module.js"></script>
+
+    <!-- Module's artifacts -->
+    <script src="src/routes.js"></script>
+    <script src="src/restaurant_menu_categories.controller.js"></script>
+    <script src="src/restaurant_menu_items.controller.js"></script>
+</body>
+</html>
