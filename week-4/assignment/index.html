@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Document</title>
-</head>
-<body ng-app="RestaurantMenuApp">
+    <link rel="stylesheet" href="/css/styles.css">
 
+    <title>Restaurant Menu App</title>
+</head>
+<body ng-app="MenuApp">
     <ui-view></ui-view>
 
     <script src="/js/angular-1.6.1.min.js"></script>
     <script src="/js/angular-ui-router-0.3.2.min.js"></script>
 
-    <!-- Module -->
-    <script src="src/restaurant_menu.module.js"></script>
+    <!-- Modules -->
+    <script src="src/menuapp.module.js"></script>
+    <script src="src/data.module.js"></script>
 
     <!-- Module's artifacts -->
     <script src="src/routes.js"></script>
-    <script src="src/restaurant_menu_categories.controller.js"></script>
-    <script src="src/restaurant_menu_items.controller.js"></script>
+    <script src="src/categories.component.js"></script>
+    <script src="src/items.component.js"></script>
+    <script src="src/categories.controller.js"></script>
+    <script src="src/items.controller.js"></script>
+    <script src="src/menudata.service.js"></script>
 </body>
 </html>

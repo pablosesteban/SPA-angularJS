@@ -1,5 +1,5 @@
 (function() {
-    angular.module("RestaurantMenuApp")
+    angular.module("MenuApp")
 
     .config(RoutesConfig);
 
@@ -14,20 +14,27 @@
         })
         .state("categories", {
             url: "/categories",
-            templateUrl: "src/templates/categories_list.template.html",
-            controller: "CategoriesCtrl as home",
+            templateUrl: "src/templates/categories.template.html",
+            controller: "CategoriesCtrl as categories",
             resolve: {
-                categories: ["RestaurantMenuService", function(RestaurantMenuService) {
-                    return RestaurantMenuService.getAllCategories().then(function(categories) {
-                        return categories;
+                menuCategories: ["MenuDataService", function(MenuDataService) {
+                    return MenuDataService.getAllCategories().then(function(response) {
+                        return response.data;
                     });
                 }]
             }
         })
         .state("categories.items", {
-            url: "/{categoryId}/items",
-            templateUrl: "src/templates/items_list.template.html",
-            controller: "ItemsCtrl as home"
+            url: "/{categoryShortName}",
+            templateUrl: "src/templates/items.template.html",
+            controller: "ItemsCtrl as items",
+            resolve: {
+                menuItems: ["MenuDataService", "$stateParams", function(MenuDataService, $stateParams) {
+                    return MenuDataService.getItemsForCategory($stateParams.categoryShortName).then(function(response) {
+                        return response.data.menu_items;
+                    });
+                }]
+            }
         });
     }
 })();
