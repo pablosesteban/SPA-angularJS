@@ -1,27 +1,11 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Index</title>
+    <head>
+        <title>Index</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <script src="js/angular-1.6.0.min.js"></script>
-    <script src="js/app.js"></script>
-  </head>
-<body ng-app="MyApp">
-   <h1>Index Page</h1>
-
-   <div ng-controller="Ctrl">
-       <input type="text" ng-model="name">
-
-       <!--
-       Interpolations *always* create another watch
-
-       It needs a separate watcher because it's not simply a matter of that property
-
-       Inside of a interpolation, you can have operations performed, so another watcher that handles those operations and redisplays the newly created results is needed
-       -->
-       {{name + "!"}}
-   </div>
-</body>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body ng-app="MyApp">
+        <h1>SPA Applications using AngularJS Framework</h1>
+    </body>
 </html>

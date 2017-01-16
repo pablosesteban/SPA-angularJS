@@ -1,0 +1,13 @@
+/*
+STEP 5: Use Angular validation styles
+    Behind the scenes, Angular's helping us out even more by injecting and removing its validation related classes from our input fields
+
+    We can use that by providing styles, for those classes in our style sheet
+*/
+.ng-touched.ng-valid {
+    border: 2px green solid;
+}
+
+.ng-touched.ng-invalid {
+    border: 2px red solid;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SimpleFormApp" >
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Simple Form Validation</title>
+</head>
+<body ng-controller="RegistrationController as reg">
+    <h1>Simple Form Validation</h1>
+
+    <fieldset>
+        <legend>Registration</legend>
+
+        <!--
+        AngularJS Form Validation:
+            Collection of all the inputs under a single form tag is not a requirement as far as HTML document validity is concerned, but is needed to use Angular Form validation
+
+            Submitting the form using a declared action attribute, does not really fit into the single page application paradigm, but, the input type submit mainly displays as a button, so we could still use it (ng-click)
+
+        STEP 1: Create a form
+            With containing input elements
+
+            Both form and input tags using the "name" attribute
+
+            Since we want Angular to take care of valuation, we need to disable the more limited native browser form validation, so it doesn't get in the way
+
+            We can do that by specifying "novalidate" attribute, on the Form element
+        -->
+        <!-- Angular will add to the $scope automatically a controller instance for this form called "regForm" to access the input fields inside angular directives attributes like ng-if... -->
+        <form name="regForm" novalidate>
+            <!--
+            STEP 2: Bind the input tag with ng-model
+                Optionally, we can also assign our button in ng-click, so we are ready to do something with our bound data in the controller, once everything validates
+
+            STEP 3: Declare HTML5 validation attributes
+                We can also optionally specify the same validation attributes, that are supplied by Angular (ng-attr)
+            -->
+            <!--
+            We want all the registration for this particular user to reside in this user object attached to the instance of our controller
+
+            NOTE:
+                The value from this input field is only copied inside of the ng-model bound property if older validations for that field have passed!
+            -->
+            <input required minlength="4" ng-maxlength="10" name="username" ng-model="reg.user.username" type="text" placeholder="Pick a username">
+
+            {{reg.user.username}}
+
+            <!--
+            STEP 4: Use Angular Form bound objects
+                In order to effect our UI and give feedback to the user
+
+                The reason you're able to refer to the Form object by its name, and access the input fields using the familiar dot notation is because when Angular compiles HTML contained with the ng-app directive and sees the form tag, it automatically creates a special controller, called FormController who's instance is attached to our $scope, with the name that the format should name specifies
+
+                Inside the FormController, Angular creates a bunch of objects that keep track of the requirements and validity of each named input contained, in the form
+
+                $touched property:
+                    Is an input state indicator, it's true if the user clicked into our input field, in other words, touched it in some since
+
+                $error property:
+                    Checks if the input name field has a validation error
+
+                Angular also creates a number of bound properties, on the Form object itself
+
+                $invalid property:
+                    To conditionally enable and disable the submit button, depending on whether or not the form is verified to be valid, based on whatever validations that we declared on it
+            -->
+            <!-- minlength does not imply that it's required, i.e. we could have this as not required, but if somebody does type something into here, we're requiring it to be at least four characters long, but if they type nothing, if the required attribute was not declared, then an empty field would have been fine, even though it is less than four characters long -->
+            <span ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">Username must be at least 4 characters long</span>
+            <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched">Username must not be longer than 10 characters</span>
+
+            <br>
+
+            <!--
+            We didn't specify that it has to be an email type looking string that you type in this text box
+
+            The reason we didn't do that is because it is implicit when an input type is typed as email that it has to be something at whatever domain
+            -->
+            <input type="email" required name="email" placeholder="Email" ng-model="reg.user.email">
+
+            <!--
+            Using $invalid property, AngularJS checks both email implicit and required validations
+
+            If we use $error.required property, AngularJS only would check for the explicit required validation and not for implicit email validation
+            -->
+            <span ng-if="regForm.email.$invalid && regForm.email.$touched">Must be a valid email address: handle@domain format</span>
+
+            <br>
+
+            <!-- NOTE that this is NOT required, so if you do not write nothing it is ok, but if you write anything it MUST match the pattern! -->
+            <input type="text" name="phone" placeholder="Phone ###-###-####" ng-model="reg.user.phone" pattern="(\d{3})-(\d{3})-(\d{4})">
+            <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">Phone must be in the format ###-###-####</span>
+
+            <br>
+            <button ng-disabled="regForm.$invalid" ng-click="reg.submit()">Submit</button>
+
+            <br>
+
+            <div>
+                <!-- Another property created by Angular in the form object (also created by Angular) -->
+                Form valid? {{regForm.$valid}}
+            </div>
+        </form>
+    </fieldset>
+
+    <div ng-if="reg.completed">
+        Username: {{reg.user.username}}
+
+        <br>
+
+        Email: {{reg.user.email}}
+
+        <br>
+
+        Phone: {{reg.user.phone}}
+    </div>
+
+    <script src="../../js/angular-1.6.1.min.js"></script>
+    <script src="../../js/angular-ui-router-0.3.2.min.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
