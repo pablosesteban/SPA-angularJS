@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app='ShoppingListApp'>
+  <head>
+    <meta charset="utf-8">
+
+    <script src="/lib/angular-1.6.1.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <title>Service Providers</title>
+  </head>
+
+  <body>
+    <h1>Service Providers</h1>
+
+    <div ng-controller="ShoppingListCtrl as list">
+        <h3>Shopping List</h3>
+
+        <input type="text" ng-model="list.itemName" placeholder="item name">
+        <input type="text" ng-model="list.itemQuantity" placeholder="item quantity">
+
+        <button ng-click="list.addItem()">Add Item</button>
+
+        <ol>
+            <li ng-repeat="item in list.items">
+                {{item.quantity}} of {{item.name}}
+
+                <button ng-click="list.removeItem($index)">Remove Item</button>
+            </li>
+        </ol>
+
+        <!--
+        NG-IF DIRECTIVE:
+            Takes a condition as its value
+
+            If that condition is true, the entire div is shown
+
+            If that condition is false, then angularJS takes the entire div out the DOM tree, i.e. it's as if this div does not exist in our HTML
+        -->
+        <div ng-if="list.errorMessage">Error: {{list.errorMessage}} </div>
+
+        <!--
+        NG-SHOW/HIDE DIRECTIVE:
+            Does exactly the same thing as ng-if, except that it will not remove the div from the document object model
+
+            It will simply put special classes on that, that Angular will know to have the div hidden
+        -->
+        <div ng-show="list.errorMessage">Error: {{list.errorMessage}} </div>
+
+        <div ng-hide="!list.errorMessage">Error: {{list.errorMessage}} </div>
+    </div>
+  </body>
+</html>

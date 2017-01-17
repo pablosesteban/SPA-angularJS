@@ -19,6 +19,8 @@ describe("CookieDetector", function() {
         This is very useful because before any test is run, we have to make sure that the conditions under which the test is running are identical to what we need them to be
 
         If your code changed some data as a result of some other test execution, and then we ran another test thinking that our application is in a certain state, when it's not
+
+        You can have more than one of this, and all will be called before any it() function
     */
     //I really didn't have to have the initialization sitting inside a for each as it doesn't really change from test to test
     beforeEach(function() {
