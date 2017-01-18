@@ -2,6 +2,8 @@
 IIFE (Immediately-Invoked Function Expression)
      Is a design-pattern which produces a lexical scope using JavaScript's function scoping
 
+     Lexical scope is "part of program" or "portion of run time"
+
      Can be used to avoid variable hoisting from within blocks, protect against polluting the global environment and simultaneously allow public access to methods while retaining privacy for variables defined within the function
 
      A common convention is to enclose the function expression in parentheses to explicitly tell the parser to expect an expression, since in JavaScript parentheses can't contain statements. Otherwise, in most situations, when the parser encounters the function keyword, it treats it as a function declaration (statement), and not as a function expression
@@ -9,6 +11,10 @@ IIFE (Immediately-Invoked Function Expression)
      The first pair of parentheses turns the code within into an expression, and the second pair of parentheses calls the function that results from that evaluated expression
 
      All the variables used inside the IIFE (like in any other normal function) are not visible outside its scope
+
+     Two ways of creating IIFE: (function(){})(); or (function(){}());
+
+     You can pass values to those functions, i.e. (function(number, string) {})(3, "pablo");
 */
 (function() {
     //We're enabling certain things to just protect us from making mistakes, i.e. creating global variables,...
