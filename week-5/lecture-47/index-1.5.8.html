@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app='ShoppingListComponentApp'>
+    <head>
+        <meta charset="utf-8">
+
+        <!--
+        BEFORE Angular!
+        -->
+        <script src="/lib/jquery-3.1.1.min.js"></script>
+        <script src="/lib/angular-1.6.1.min.js"></script>
+        <script src="js/app-1.5.8.js"></script>
+
+        <link rel="stylesheet" href="/css/styles.css">
+
+        <title>Components & Component-Based Architecture</title>
+    </head>
+    <body>
+        <h1>Components & Component-Based Architecture</h1>
+
+        <div ng-controller='ShoppingListController as list'>
+            <input type="text" ng-model="list.itemName" placeholder="item name">
+            <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
+
+            <button ng-click="list.addItem();">Add Item</button>
+
+            {{list.lastRemoveItem}}
+
+            <!--
+            Used as exactly as you would use the custom directives
+
+            Note the normalized property names
+            -->
+            <shopping-list
+                items="list.items"
+                title="{{list.title}}"
+                on-remove="list.removeItem(index)"></shopping-list>
+        </div>
+    </body>
+</html>

@@ -73,6 +73,7 @@ describe("shoppinglist directive", function() {
         //If we manually place our template into the $templateCache, we are actually blocking HTTP request to load the the directives template into the cache
         //The key string MUST be the path where is the template and of course the same as in the ajax call
         $templateCache.put("template/shoppingList.html", directiveTemplate);
+
         console.log($templateCache.get("template/shoppingList.html"));
     }));
 
@@ -118,8 +119,10 @@ describe("shoppinglist directive", function() {
         var element = $compile(html)($rootScope);
 
         $rootScope.$digest();
+
         console.log("Element: ", element.html().replace(/\s/g, ''));
         console.log("Expected: ", expectedHtml);
+
         expect(element.html().replace(/\s/g, '')).toContain(expectedHtml);
     });
 })
