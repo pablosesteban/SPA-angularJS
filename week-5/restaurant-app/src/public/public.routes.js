@@ -27,5 +27,32 @@
       // ajax call (only first time) and put it on $templateCache
       templateUrl: "src/public/home/home.html"
     })
+    /*
+    This templateUrl is now going to get inserted in the same place where we previously inserted home.html because they are part of the same parent
+
+    This one is going to get inserted inside of the ui-view directive inside of public.html
+    */
+    .state("public.menu", {
+      url: "/menu",
+      templateUrl: "src/public/menu/menu.html",
+      controller: "MenuController",
+      controllerAs: "menuCtrl",
+      resolve: {
+        menuCategories: ["MenuService", function(MenuService) {
+          return MenuService.getCategories();
+        }]
+      }
+    })
+    .state("public.menuitems", {
+      url: "/menu/{category}",
+      templateUrl: "src/public/menu-items/menu-items.html",
+      controller: "MenuItemsController",
+      controllerAs: "menuItemsCtrl",
+      resolve: {
+        menuItems: ["MenuService", "$stateParams", function(MenuService, $stateParams) {
+          return MenuService.getCategoryItems($stateParams.category);
+        }]
+      }
+    });
   }
 })();

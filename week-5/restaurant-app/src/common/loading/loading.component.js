@@ -9,14 +9,16 @@
 
   LoadingController.$inject = ["$rootScope"];
   function LoadingController($rootScope) {
+    var $ctrl = this;
+
     var cancelListener;
 
     this.$onInit = function() {
-      this.show = false;
+      $ctrl.show = false;
 
       // somewhere else in the system we'll throw an event called "spinner:activate"
       cancelListener = $rootScope.$on("spinner:activate", function(event, data) {
-        this.show = data.on;
+        $ctrl.show = data.on;
       });
     };
 
