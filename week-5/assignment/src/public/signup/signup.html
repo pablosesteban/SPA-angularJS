@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <form class="commonForm" name="signupForm" novalidate ng-submit="">
+        <input required name="firstName" type="text" placeholder="First Name" ng-model="signupCtrl.user.firstName">
+        <span ng-if="signupForm.firstName.$error.required && signupForm.firstName.$touched">Required</span>
+        <hr>
+
+        <input required name="lastName" type="text" placeholder="Last Name" ng-model="signupCtrl.user.lastName">
+        <span ng-if="signupForm.lastName.$error.required && signupForm.lastName.$touched">Required</span>
+        <hr>
+
+        <input required name="email" type="email" placeholder="Email" ng-model="signupCtrl.user.email">
+        <span ng-if="signupForm.email.$invalid && signupForm.email.$touched">Must be a valid email address: handle@domain</span>
+        <hr>
+
+        <input required ng-maxlength="9" pattern="\d{9}" name="phone" type="text" placeholder="Phone Number" ng-model="signupCtrl.user.phone">
+        <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">Must be 9 numbers long</span>
+        <hr>
+
+        <!--
+        Favorite Menu
+        <select name="menuCategorieShortNames">
+          <option ng-repeat="menuCategoryShortName in signupCtrl.menuCategoriesShortNames" value="{{menuCategoryShortName}}">{{menuCategoryShortName}}</option>
+        </select>
+        -->
+
+        <input type="text" ng-model="signupCtrl.user.favMenu" placeholder="Favourite Menu">
+        <span ng-if="signupCtrl.user.favMenuError">No such menu short name exists</span>
+        <span ng-if="signupCtrl.user.favMenuSuccess">Your information has been saved</span>
+        <hr>
+
+        <button ng-disabled="signupForm.$invalid" ng-click="signupCtrl.submit()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

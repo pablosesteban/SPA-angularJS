@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div ng-if="infoCtrl.logged === false">
+        <span>Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a></span>
+      </div>
+
+      <div ng-if="infoCtrl.logged === true">
+        <div>
+          <h2>Personal Info</h2>
+
+          First Name: <span>{{infoCtrl.firstName}}</span>
+          <br>
+
+          Last Name: <span>{{infoCtrl.lastName}}</span>
+          <br>
+
+          Email: <span>{{infoCtrl.email}}</span>
+          <br>
+
+          Phone Number: <span>{{infoCtrl.phone}}</span>
+        </div>
+
+        <hr>
+
+        <menu-item item="menuItem" ng-repeat="menuItem in infoCtrl.favMenuItems"></menu-item>
+      </div>
+    </div>
+  </div>
+</div>
