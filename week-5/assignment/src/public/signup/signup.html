@@ -25,9 +25,9 @@
         </select>
         -->
 
-        <input type="text" ng-model="signupCtrl.user.favMenu" placeholder="Favourite Menu">
-        <span ng-if="signupCtrl.user.favMenuError">No such menu short name exists</span>
-        <span ng-if="signupCtrl.user.favMenuSuccess">Your information has been saved</span>
+        <input type="text" ng-model="signupCtrl.user.favDish" placeholder="Favourite Dish">
+        <span ng-if="signupCtrl.user.favDishError">No such menu short name exists</span>
+        <span ng-if="signupCtrl.user.favDishSuccess">Your information has been saved</span>
         <hr>
 
         <button ng-disabled="signupForm.$invalid" ng-click="signupCtrl.submit()">Submit</button>

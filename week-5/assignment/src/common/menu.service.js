@@ -10,7 +10,7 @@
   MenuService.$inject = ["$http", "ApiHost"];
   function MenuService($http, ApiHost) {
     this.user = {};
-    
+
     console.log("MenuService Loaded: ", this);
     this.getCategories = function() {
       // This $http service request is also get intercepted by the interceptor we defined
@@ -35,6 +35,19 @@
       return $http.get(ApiHost + "/menu_items.json", requestConfig).then(function(response) {
         return response.data;
       });
+    }
+
+    this.getCategoryItem = function(categoryItemShortName) {
+      return $http.get(ApiHost + "/menu_items/" + categoryItemShortName + ".json").then(
+        //ON SUCCESS
+        function(response) {
+          return response.data;
+        },
+        //ON ERROR
+        function(error) {
+          console.log("error:", error);
+          return error.data;
+        });
     }
   }
 })();

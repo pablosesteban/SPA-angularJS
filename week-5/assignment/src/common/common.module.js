@@ -14,7 +14,7 @@
   angular.module("common", [])
   // Configure the $httpProvider service to use the interceptor we create
   .config(HttpConfig)
-  .constant("ApiHost", "https://davids-restaurant.herokuapp.com");
+  .constant("ApiHost", "https://pablosesteban-restaurant.herokuapp.com");
 
   /*
   INTERCEPTORS

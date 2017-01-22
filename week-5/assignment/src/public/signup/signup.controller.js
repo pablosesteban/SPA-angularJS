@@ -16,27 +16,25 @@
     // });
 
     signupCtrl.submit = function() {
-      var favMenuItems;
+      var favDish;
 
-      //devulve todo si no se le especifica un menu!
-      MenuService.getCategoryItems(signupCtrl.user.favMenu).then(function(response) {
-        favMenuItems = response.menu_items;
+      MenuService.getCategoryItem(signupCtrl.user.favDish).then(function(response) {
+        favDish = response;
+        
+        if (!favDish.error) {
+          signupCtrl.user.favDishSuccess = true;
 
-        //devulve todo si no se le especifica un menu!
-        if (favMenuItems.length > 0) {
-          signupCtrl.user.favMenuSuccess = true;
-
-          signupCtrl.user.favMenuError = false;
+          signupCtrl.user.favDishError = false;
 
           MenuService.user.firstName = signupCtrl.user.firstName;
           MenuService.user.lastName = signupCtrl.user.lastName;
           MenuService.user.email = signupCtrl.user.email;
           MenuService.user.phone = signupCtrl.user.phone;
-          MenuService.user.favMenuItems = favMenuItems;
+          MenuService.user.favDish = favDish;
         }else {
-          signupCtrl.user.favMenuError = true;
+          signupCtrl.user.favDishError = true;
 
-          signupCtrl.user.favMenuSuccess = false;
+          signupCtrl.user.favDishSuccess = false;
 
           MenuService.user = null;
         }
