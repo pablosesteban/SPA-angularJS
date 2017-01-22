@@ -20,7 +20,7 @@
 
       MenuService.getCategoryItem(signupCtrl.user.favDish).then(function(response) {
         favDish = response;
-        
+
         if (!favDish.error) {
           signupCtrl.user.favDishSuccess = true;
 
@@ -35,8 +35,6 @@
           signupCtrl.user.favDishError = true;
 
           signupCtrl.user.favDishSuccess = false;
-
-          MenuService.user = null;
         }
       });
     }
