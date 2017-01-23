@@ -15,6 +15,16 @@
     //   signupCtrl.menuCategoriesShortNames.push(menuCategory.short_name);
     // });
 
+    signupCtrl.checkDish = function() {
+      MenuService.getCategoryItem(signupCtrl.user.favDish).then(function(response) {
+        signupCtrl.user.favDishError = false;
+
+        if (response.error) {
+          signupCtrl.user.favDishError = true;
+        }
+      });
+    }
+
     signupCtrl.submit = function() {
       var favDish;
 
