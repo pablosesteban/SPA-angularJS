@@ -1,2 +1,2 @@
 # SPA-angularJS
-Repository for Single Page Web Applications with AngularJS Course in Coursera
+Repository for Single Page Web Applications with AngularJS course in Coursera
